@@ -61,7 +61,8 @@ def check_pages(config):
                 for found_text in found_texts:
                     # An expected text is missing, let's notify recipients -- if it's the first time
                     if have_this_text.lower() not in found_text.lower():
-                        page_prob_key = "ALERT: expected text not found: \"{:s}\", in: {:s}"
+                        page_prob_key = "ALERT: expected text not found: \"{:s}\", in: {:s}".format(
+                            have_this_text, page.url)
                         if page_prob_key not in page_probs_known:
                             page_probs_new[page_prob_key] = time.strftime("%D %T")
                             results.append(page_prob_key)
@@ -84,7 +85,7 @@ def email_it(results, config):
         LOGGER.warning("Sending email to {:s}".format(target))
         yag.send(
             to=target,
-            subject='ALERT: Elegoo Saturn Monitor page change',
+            subject='ALERT: Elegoo Saturn Monitor page change (%d)' % len(results),
             contents=results_text)
 
 
