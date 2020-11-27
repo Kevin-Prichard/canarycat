@@ -13,8 +13,10 @@ from lxml import etree
 import requests
 import yagmail
 
+# html.tostring(tree)
 
 page_probs_file = "page_problems_notified.json"
+
 
 def check_pages(config):
     # We remember when a page went missing or had a structural change that caused a pattern to fail
@@ -32,7 +34,7 @@ def check_pages(config):
     for page in config.PAGES:
         resp = requests.get(page.url)
         if resp.status_code != 200:
-            page_prob_key = "Got HTTP {:d} for {:s}".format(resp.status_code, page.url)
+            page_prob_key = "Warning: missing page, got HTTP {:d} for {:s}".format(resp.status_code, page.url)
             LOGGER.warning(page_prob_key)
             if page_prob_key not in page_probs_known:
                 page_probs_new[page_prob_key] = time.strftime("%D %T")
@@ -48,7 +50,7 @@ def check_pages(config):
             res = tree.xpath(xpath)
             if not len(res):
                 # If the pattern no longer yields a subtree, record that in the JSON and notify recipients
-                page_prob_key = "Page appears to be missing xpath:{:s}, url:{:s}".format(xpath, page.url)
+                page_prob_key = "Warning: page appears to be missing xpath:{:s}, url:{:s}".format(xpath, page.url)
                 if page_prob_key not in page_probs_known:
                     page_probs_new[page_prob_key] = time.strftime("%D %T")
                     results.append(page_prob_key)
@@ -59,7 +61,7 @@ def check_pages(config):
                 for found_text in found_texts:
                     # An expected text is missing, let's notify recipients -- if it's the first time
                     if have_this_text.lower() not in found_text.lower():
-                        page_prob_key = "Page does not have expected text \"{:s}\", in: {:s}"
+                        page_prob_key = "ALERT: expected text not found: \"{:s}\", in: {:s}"
                         if page_prob_key not in page_probs_known:
                             page_probs_new[page_prob_key] = time.strftime("%D %T")
                             results.append(page_prob_key)
@@ -82,7 +84,7 @@ def email_it(results, config):
         LOGGER.warning("Sending email to {:s}".format(target))
         yag.send(
             to=target,
-            subject='Testing testing',
+            subject='ALERT: Elegoo Saturn Monitor page change',
             contents=results_text)
 
 
