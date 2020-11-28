@@ -1,11 +1,23 @@
 ## Introduction
 
-The script in this repo monitors certain pages for the disappearance of certain text. Useful as a warrant canary canary, or some such.
+<style>
+.site-main table.no-border td {
+    border: none;
+}
+</style>
 
-Periodically invoke this via cron job. Upon detecting that an expected text snippet on a page & xpath deviates from an expected string, it will send a notification email.
-
-Only when that occurs will it send an email. It'll periodically "forget" that it already notified you, just to let you know again -currently every 12 hours.
-
+<table width="100%" class="no-border">
+<tr>
+<td>
+<p>The script in this repo monitors certain pages for the disappearance of certain text. Useful as a warrant canary canary, or some such.</P>
+<p>Periodically invoke this via cron job. Upon detecting that an expected text snippet on a page & xpath deviates from an expected string, it will send a notification email.</p>
+<p>Only when that occurs will it send an email. It'll periodically "forget" that it already notified you, just to let you know again -currently every 12 hours.</p>
+</td>
+<td>
+<img width="300" src="https://raw.githubusercontent.com/kevin-prichard/canarycat/master/canary-cat.png" />
+</td>
+</tr>
+</table>
 
 ### Installation
 Create and activate a virtual Python 3 environment. For example-
