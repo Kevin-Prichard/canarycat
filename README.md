@@ -1,10 +1,10 @@
 ## Introduction
 
-The script in this repo monitors certain pages for the disappearance of certain text
+The script in this repo monitors certain pages for the disappearance of certain text. Useful as a warrant canary canary, or some such.
 
-Periodically invoke this as a cron job and, upon detecting that an expected text snippet on a page & xpath deviates from an expected string, it will send a notification email.
+Periodically invoke this via cron job. Upon detecting that an expected text snippet on a page & xpath deviates from an expected string, it will send a notification email.
 
-Only when that occurs will it sends an email.
+Only when that occurs will it send an email. It'll periodically "forget" that it already notified you, just to let you know again -currently every 12 hours.
 
 
 ### Installation
