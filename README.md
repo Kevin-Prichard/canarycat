@@ -35,6 +35,9 @@ Therefore, you probably need to set up your gmail account for password-based acc
 And you might need to enable this-
     https://realpython.com/python-send-email/#option-1-setting-up-a-gmail-account-for-development
 
+### Via text: email-to-SMS
+If you want a text instead of/in addition to email, there are options for (mainly North American) phone services- free email-to-SMS exchange. Generally it's <your phone number>@somespecialdomain.com. Details:
+    https://resources.voyant.com/en/articles/3107728-sending-emails-to-sms-or-mms 
 
 ### Execution
 This script currently expects as first and only parameter the name of a config module, relative to the repo root. This is not very sophisticated,  but it works for now.
