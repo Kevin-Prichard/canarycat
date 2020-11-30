@@ -1,7 +1,5 @@
 from collections import namedtuple
 
-PageInfo = namedtuple("PageInfo", ["url", "xpath_tests"])
-
 MONITOR_NAME = "name me"
 SENDER_EMAIL = "your_email@gmail.com"
 TARGET_EMAILS = ["..."]
